@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:latest
+    hostname: db
+    restart: unless-stopped
+    networks:
+      - default
+    environment:
+      POSTGRES_DB: todo 
+      POSTGRES_USER: todo 
+      POSTGRES_PASSWORD: todo 
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: "300MB"
